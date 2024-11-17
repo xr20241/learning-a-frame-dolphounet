@@ -9,13 +9,16 @@
     utils,
   }:
     utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs {inherit system;};
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
     in {
       devShell = with pkgs;
         mkShell {
           buildInputs = [
             nodejs_22
-            nodePackages.pnpm
+            unrar
           ];
         };
     });
